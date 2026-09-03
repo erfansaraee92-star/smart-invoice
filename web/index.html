@@ -3,19 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فاکتورساز هوشمند</title>
+<title>فاکتورساز هوشمند | ورود</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
-.login-overlay{position:fixed;inset:0;background:rgba(15,23,42,.97);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
-.login-box{background:#1e293b;width:100%;max-width:450px;padding:40px;border-radius:20px;text-align:center;border:1px solid #334155}
-.login-icon{font-size:3rem;margin-bottom:15px;display:block}.login-box h2{color:#10b981;margin-bottom:10px}
-.login-box p{color:#94a3b8;font-size:.9rem;margin-bottom:20px;line-height:1.6}
-.tg-input{width:100%;padding:14px;border:2px solid #334155;border-radius:10px;background:#0f172a;color:#fff;font-size:1.1rem;text-align:center;margin-bottom:15px;direction:ltr}
-.tg-input:focus{border-color:#10b981;outline:none}
-.btn-primary{width:100%;padding:14px;background:linear-gradient(135deg,#10b981,#34d399);color:#fff;border:none;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer}
-.status-msg{font-size:.85rem;margin-top:12px;min-height:20px;font-weight:600}
+.auth-overlay{position:fixed;inset:0;background:rgba(15,23,42,.98);z-index:9999;display:flex;align-items:center;justify-content:center}
+.auth-box{background:#1e293b;width:100%;max-width:420px;padding:40px;border-radius:20px;border:1px solid #334155;text-align:center}
+.auth-box h2{color:#10b981;margin-bottom:25px;font-size:1.6rem}
+.form-group{margin-bottom:15px;text-align:right}
+.form-group label{display:block;color:#94a3b8;font-size:.85rem;margin-bottom:6px}
+.form-group input{width:100%;padding:12px;border:1px solid #334155;border-radius:8px;background:#0f172a;color:#fff;font-size:1rem;direction:ltr;text-align:left}
+.form-group input:focus{border-color:#10b981;outline:none}
+.btn-auth{width:100%;padding:14px;background:linear-gradient(135deg,#10b981,#34d399);color:#fff;border:none;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer;margin-top:10px}
+.toggle-auth{margin-top:20px;color:#94a3b8;font-size:.9rem}
+.toggle-auth span{color:#60a5fa;cursor:pointer;text-decoration:underline}
+.status-msg{font-size:.85rem;margin-top:15px;min-height:20px;font-weight:600}
 .status-error{color:#dc2626}.status-success{color:#10b981}
-.support-link{display:inline-block;margin-top:20px;color:#60a5fa;font-size:.85rem;text-decoration:none}
+
 .app-container{display:none;max-width:1100px;margin:0 auto;padding:20px}.app-container.unlocked{display:block}
 .app-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:15px}
 .app-header h1{color:#10b981;font-size:1.4rem}
@@ -24,8 +27,6 @@
 .invoice-form{background:#1e293b;border-radius:16px;padding:25px;border:1px solid #334155;margin-bottom:25px}
 .invoice-form h3{color:#34d399;margin-bottom:20px}
 .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:15px}
-.form-group label{display:block;color:#94a3b8;font-size:.82rem;margin-bottom:6px}
-.form-group input,.form-group select{width:100%;padding:12px;border:1px solid #334155;border-radius:8px;background:#0f172a;color:#fff}
 .items-section{margin-top:20px;border-top:1px solid #334155;padding-top:20px}
 .item-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;margin-bottom:10px;align-items:end}
 .item-row input{padding:10px;border:1px solid #334155;border-radius:6px;background:#0f172a;color:#fff}
@@ -45,25 +46,33 @@
 .preview-table td{padding:12px;border-bottom:1px solid #e5e7eb}
 .preview-totals{text-align:left;margin-top:20px}.preview-totals .final{font-size:1.2rem;font-weight:800;color:#065f46;border-top:2px solid #10b981;padding-top:10px;margin-top:10px}
 .download-btn{margin-top:20px;padding:12px 30px;background:#065f46;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer}
-.credit-warning{background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:15px;border-radius:10px;margin-bottom:20px;text-align:center;display:none}
-.credit-warning.show{display:block}
 @media(max-width:600px){.item-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<div class="login-overlay" id="loginOverlay">
-  <div class="login-box">
-    <span class="login-icon">🧾</span>
-    <h2>فاکتورساز هوشمند</h2>
-    <p>ساخت فاکتور حرفه‌ای فارسی<br>Telegram ID خود را وارد کنید</p>
-    <input type="text" id="telegramIdInput" class="tg-input" placeholder="@username یا عدد ID">
-    <button class="btn-primary" onclick="doLogin()">ورود به سیستم</button>
-    <div id="loginStatus" class="status-msg"></div>
-    <a href="https://t.me/King_of_elessar" target="_blank" class="support-link">💬 خرید اعتبار: @King_of_elessar</a>
+<!-- بخش احراز هویت -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-box">
+    <h2 id="authTitle">🔐 ورود به حساب</h2>
+    <div id="loginForm">
+      <div class="form-group"><label>ایمیل</label><input type="email" id="loginEmail" placeholder="name@example.com"></div>
+      <div class="form-group"><label>رمز عبور</label><input type="password" id="loginPass" placeholder="حداقل ۶ کاراکتر"></div>
+      <button class="btn-auth" onclick="doLogin()">ورود</button>
+      <div class="toggle-auth">حساب ندارید؟ <span onclick="toggleAuth('register')">ثبت‌نام کنید</span></div>
+    </div>
+    <div id="registerForm" style="display:none">
+      <div class="form-group"><label>نام نمایشی</label><input type="text" id="regName" placeholder="نام شما یا شرکت"></div>
+      <div class="form-group"><label>ایمیل</label><input type="email" id="regEmail" placeholder="name@example.com"></div>
+      <div class="form-group"><label>رمز عبور</label><input type="password" id="regPass" placeholder="حداقل ۶ کاراکتر"></div>
+      <button class="btn-auth" onclick="doRegister()">ثبت‌نام رایگان</button>
+      <div class="toggle-auth">قبلاً ثبت‌نام کرده‌اید؟ <span onclick="toggleAuth('login')">وارد شوید</span></div>
+    </div>
+    <div id="authStatus" class="status-msg"></div>
   </div>
 </div>
 
+<!-- محیط اصلی برنامه -->
 <div class="app-container" id="mainApp">
   <div class="app-header">
     <h1>🧾 فاکتورساز هوشمند</h1>
@@ -72,7 +81,6 @@
       <button class="logout-btn" onclick="doLogout()">خروج</button>
     </div>
   </div>
-  <div class="credit-warning" id="creditWarning">⚠️ اعتبار تمام شده. <a href="https://t.me/King_of_elessar" target="_blank" style="color:#92400e;font-weight:700">@King_of_elessar</a></div>
 
   <div class="invoice-form">
     <h3>📝 اطلاعات فاکتور</h3>
@@ -109,46 +117,91 @@
 // ⚠️ آدرس سرور بک‌اند خود را اینجا وارد کنید
 var API_URL = 'https://smart-invoice-server.onrender.com';
 
-var currentTelegramId = '';
+var currentToken = localStorage.getItem('si_token');
 var currentCredits = 0;
 var items = [];
 
 function formatNumber(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
 
+function toggleAuth(mode) {
+  document.getElementById('authStatus').textContent = '';
+  if (mode === 'register') {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('registerForm').style.display = 'block';
+    document.getElementById('authTitle').textContent = '✨ ثبت‌نام رایگان';
+  } else {
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('authTitle').textContent = '🔐 ورود به حساب';
+  }
+}
+
 async function doLogin() {
-  var input = document.getElementById('telegramIdInput').value.trim().replace(/^@/, '');
-  var st = document.getElementById('loginStatus');
-  if (!input) { st.textContent = 'ID الزامی است'; st.className = 'status-msg status-error'; return; }
+  var email = document.getElementById('loginEmail').value.trim();
+  var pass = document.getElementById('loginPass').value;
+  var st = document.getElementById('authStatus');
+  if (!email || !pass) { st.textContent = 'لطفاً تمام فیلدها را پر کنید'; st.className = 'status-msg status-error'; return; }
+  
   st.textContent = 'در حال بررسی...';
   try {
-    var res = await fetch(API_URL + '/api/user/profile', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Telegram-ID': input } });
+    var res = await fetch(API_URL + '/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, password: pass }) });
     var data = await res.json();
     if (data.success) {
-      currentTelegramId = input; currentCredits = data.user.credits;
-      localStorage.setItem('si_tg_id', input); updateUI();
-      document.getElementById('loginOverlay').style.display = 'none';
-      document.getElementById('mainApp').classList.add('unlocked');
-      addItem(); addItem();
-    } else { st.textContent = data.error || 'خطا'; st.className = 'status-msg status-error'; }
+      currentToken = data.token; currentCredits = data.credits;
+      localStorage.setItem('si_token', data.token);
+      unlockApp();
+    } else { st.textContent = data.error || 'خطا در ورود'; st.className = 'status-msg status-error'; }
   } catch(e) { st.textContent = '❌ خطا در اتصال به سرور'; st.className = 'status-msg status-error'; }
 }
 
+async function doRegister() {
+  var name = document.getElementById('regName').value.trim();
+  var email = document.getElementById('regEmail').value.trim();
+  var pass = document.getElementById('regPass').value;
+  var st = document.getElementById('authStatus');
+  if (!email || !pass) { st.textContent = 'ایمیل و رمز عبور الزامی است'; st.className = 'status-msg status-error'; return; }
+  
+  st.textContent = 'در حال ثبت‌نام...';
+  try {
+    var res = await fetch(API_URL + '/api/auth/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, email: email, password: pass }) });
+    var data = await res.json();
+    if (data.success) {
+      st.textContent = 'ثبت‌نام موفق! اکنون وارد شوید.'; st.className = 'status-msg status-success';
+      setTimeout(() => toggleAuth('login'), 1500);
+    } else { st.textContent = data.error || 'خطا در ثبت‌نام'; st.className = 'status-msg status-error'; }
+  } catch(e) { st.textContent = '❌ خطا در اتصال به سرور'; st.className = 'status-msg status-error'; }
+}
+
+async function checkSession() {
+  if (!currentToken) return;
+  try {
+    var res = await fetch(API_URL + '/api/auth/me', { headers: { 'Authorization': 'Bearer ' + currentToken } });
+    var data = await res.json();
+    if (data.success) { currentCredits = data.user.credits; unlockApp(); }
+    else { localStorage.removeItem('si_token'); currentToken = null; }
+  } catch(e) {}
+}
+
+function unlockApp() {
+  document.getElementById('authOverlay').style.display = 'none';
+  document.getElementById('mainApp').classList.add('unlocked');
+  updateUI();
+  if (items.length === 0) { addItem(); addItem(); }
+}
+
 function doLogout() {
-  currentTelegramId = ''; localStorage.removeItem('si_tg_id');
+  currentToken = null; localStorage.removeItem('si_token');
   document.getElementById('mainApp').classList.remove('unlocked');
-  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('authOverlay').style.display = 'flex';
+  toggleAuth('login');
 }
 
 function updateUI() {
   document.getElementById('creditsBadge').textContent = '💎 ' + currentCredits + ' اعتبار';
-  var w = document.getElementById('creditWarning');
-  if (currentCredits <= 0) w.classList.add('show'); else w.classList.remove('show');
 }
 
-(async function() {
-  var s = localStorage.getItem('si_tg_id');
-  if (s) { try { var r = await fetch(API_URL+'/api/user/profile',{method:'POST',headers:{'Content-Type':'application/json','X-Telegram-ID':s}}); var d=await r.json(); if(d.success){currentTelegramId=s;currentCredits=d.user.credits;updateUI();document.getElementById('loginOverlay').style.display='none';document.getElementById('mainApp').classList.add('unlocked');addItem();addItem();}}catch(e){} }
-})();
+// بررسی نشست فعال هنگام لود صفحه
+checkSession();
 
 function addItem() { items.push({id:Date.now()+Math.random(),desc:'',qty:1,price:0}); renderItems(); }
 function removeItem(id) { items=items.filter(function(i){return i.id!==id}); renderItems(); updateTotals(); }
@@ -170,12 +223,13 @@ async function generateInvoice() {
   if(!document.getElementById('clientName').value.trim()){alert('نام مشتری الزامی است');return;}
   var btn=document.getElementById('generateBtn');btn.disabled=true;btn.textContent='⏳ پردازش...';
   try {
-    var chk=await fetch(API_URL+'/api/credits/check',{method:'POST',headers:{'Content-Type':'application/json','X-Telegram-ID':currentTelegramId},body:JSON.stringify({cost:1})});
+    var chk=await fetch(API_URL+'/api/credits/check',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+currentToken},body:JSON.stringify({cost:1})});
     var cd=await chk.json(); if(!cd.success){alert(cd.message);btn.disabled=false;btn.textContent='🧾 پیش‌نمایش و ذخیره (۱ اعتبار)';return;}
-    var con=await fetch(API_URL+'/api/credits/consume',{method:'POST',headers:{'Content-Type':'application/json','X-Telegram-ID':currentTelegramId},body:JSON.stringify({cost:1,description:'Invoice'})});
-    var cond=await con.json(); if(!cond.success){alert('خطا کسر اعتبار');btn.disabled=false;btn.textContent='🧾 پیش‌نمایش و ذخیره (۱ اعتبار)';return;}
-    currentCredits=cond.balance;updateUI();
     
+    var con=await fetch(API_URL+'/api/credits/consume',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+currentToken},body:JSON.stringify({cost:1})});
+    var cond=await con.json(); if(!cond.success){alert('خطا کسر اعتبار');btn.disabled=false;btn.textContent='🧾 پیش‌نمایش و ذخیره (۱ اعتبار)';return;}
+    
+    currentCredits=cond.balance;updateUI();
     var sub=items.reduce(function(s,i){return s+(i.qty*i.price)},0);var tax=Math.floor(sub*0.09);var tot=sub+tax;
     document.getElementById('previewTitle').textContent=document.getElementById('invoiceTitle').value||'فاکتور فروش';
     document.getElementById('previewMeta').innerHTML='مشتری: '+document.getElementById('clientName').value+'<br>شماره: '+(document.getElementById('invoiceNumber').value||'-')+'<br>تاریخ: '+new Date().toLocaleDateString('fa-IR');
