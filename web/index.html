@@ -5,59 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>فاکتورساز هوشمند</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
 .login-overlay{position:fixed;inset:0;background:rgba(15,23,42,.97);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
-.login-box{background:#1e293b;width:100%;max-width:450px;padding:40px;border-radius:20px;text-align:center;border:1px solid #334155;box-shadow:0 25px 60px rgba(0,0,0,.5)}
-.login-icon{font-size:3rem;margin-bottom:15px;display:block}
-.login-box h2{color:#10b981;margin-bottom:10px;font-size:1.5rem}
+.login-box{background:#1e293b;width:100%;max-width:450px;padding:40px;border-radius:20px;text-align:center;border:1px solid #334155}
+.login-icon{font-size:3rem;margin-bottom:15px;display:block}.login-box h2{color:#10b981;margin-bottom:10px}
 .login-box p{color:#94a3b8;font-size:.9rem;margin-bottom:20px;line-height:1.6}
 .tg-input{width:100%;padding:14px;border:2px solid #334155;border-radius:10px;background:#0f172a;color:#fff;font-size:1.1rem;text-align:center;margin-bottom:15px;direction:ltr}
 .tg-input:focus{border-color:#10b981;outline:none}
 .btn-primary{width:100%;padding:14px;background:linear-gradient(135deg,#10b981,#34d399);color:#fff;border:none;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer}
-.btn-primary:hover{filter:brightness(1.08)}
 .status-msg{font-size:.85rem;margin-top:12px;min-height:20px;font-weight:600}
 .status-error{color:#dc2626}.status-success{color:#10b981}
 .support-link{display:inline-block;margin-top:20px;color:#60a5fa;font-size:.85rem;text-decoration:none}
-.app-container{display:none;max-width:1100px;margin:0 auto;padding:20px}
-.app-container.unlocked{display:block}
+.app-container{display:none;max-width:1100px;margin:0 auto;padding:20px}.app-container.unlocked{display:block}
 .app-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:15px}
 .app-header h1{color:#10b981;font-size:1.4rem}
-.credits-badge{background:#1e293b;border:1px solid #334155;padding:8px 16px;border-radius:10px;font-weight:700;color:#10b981;font-size:.9rem}
-.logout-btn{background:transparent;color:#94a3b8;border:1px solid #334155;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.85rem}
-.logout-btn:hover{color:#fff;border-color:#fff}
+.credits-badge{background:#1e293b;border:1px solid #334155;padding:8px 16px;border-radius:10px;font-weight:700;color:#10b981}
+.logout-btn{background:transparent;color:#94a3b8;border:1px solid #334155;padding:8px 16px;border-radius:8px;cursor:pointer}
 .invoice-form{background:#1e293b;border-radius:16px;padding:25px;border:1px solid #334155;margin-bottom:25px}
-.invoice-form h3{color:#34d399;margin-bottom:20px;font-size:1.1rem}
+.invoice-form h3{color:#34d399;margin-bottom:20px}
 .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:15px}
 .form-group label{display:block;color:#94a3b8;font-size:.82rem;margin-bottom:6px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px;border:1px solid #334155;border-radius:8px;background:#0f172a;color:#fff;font-size:.9rem}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#10b981;outline:none}
+.form-group input,.form-group select{width:100%;padding:12px;border:1px solid #334155;border-radius:8px;background:#0f172a;color:#fff}
 .items-section{margin-top:20px;border-top:1px solid #334155;padding-top:20px}
 .item-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;margin-bottom:10px;align-items:end}
-.item-row input{padding:10px;border:1px solid #334155;border-radius:6px;background:#0f172a;color:#fff;font-size:.85rem}
-.add-item-btn{background:#334155;color:#e2e8f0;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:.85rem;margin-top:10px}
-.add-item-btn:hover{background:#475569}
-.remove-item{background:#dc2626;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.8rem}
+.item-row input{padding:10px;border:1px solid #334155;border-radius:6px;background:#0f172a;color:#fff}
+.add-item-btn{background:#334155;color:#e2e8f0;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;margin-top:10px}
+.remove-item{background:#dc2626;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
 .totals{margin-top:20px;padding:15px;background:#0f172a;border-radius:10px;text-align:left;direction:ltr}
-.total-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.9rem;color:#94a3b8}
+.total-row{display:flex;justify-content:space-between;padding:6px 0;color:#94a3b8}
 .total-row.final{color:#10b981;font-weight:800;font-size:1.1rem;border-top:1px solid #334155;padding-top:12px;margin-top:8px}
 .generate-btn{width:100%;margin-top:20px;padding:16px;background:linear-gradient(135deg,#10b981,#34d399);color:#fff;border:none;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer}
-.generate-btn:hover{filter:brightness(1.08)}
 .generate-btn:disabled{opacity:.5;cursor:not-allowed}
 .preview-section{background:#fff;color:#1e293b;border-radius:16px;padding:30px;margin-top:25px;display:none}
 .preview-section.show{display:block}
 .preview-header{display:flex;justify-content:space-between;margin-bottom:30px;border-bottom:2px solid #10b981;padding-bottom:15px}
 .preview-title{font-size:1.5rem;font-weight:800;color:#065f46}
-.preview-meta{text-align:left;font-size:.85rem;color:#6b7280}
 .preview-table{width:100%;border-collapse:collapse;margin:20px 0}
-.preview-table th{background:#f0fdf4;color:#065f46;padding:12px;text-align:right;border-bottom:2px solid #10b981;font-size:.85rem}
-.preview-table td{padding:12px;border-bottom:1px solid #e5e7eb;font-size:.9rem}
-.preview-totals{text-align:left;margin-top:20px;font-size:.95rem}
-.preview-totals .final{font-size:1.2rem;font-weight:800;color:#065f46;margin-top:10px;padding-top:10px;border-top:2px solid #10b981}
-.download-btn{margin-top:20px;padding:12px 30px;background:#065f46;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer}
+.preview-table th{background:#f0fdf4;color:#065f46;padding:12px;text-align:right;border-bottom:2px solid #10b981}
+.preview-table td{padding:12px;border-bottom:1px solid #e5e7eb}
+.preview-totals{text-align:left;margin-top:20px}.preview-totals .final{font-size:1.2rem;font-weight:800;color:#065f46;border-top:2px solid #10b981;padding-top:10px;margin-top:10px}
+.download-btn{margin-top:20px;padding:12px 30px;background:#065f46;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer}
 .credit-warning{background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:15px;border-radius:10px;margin-bottom:20px;text-align:center;display:none}
 .credit-warning.show{display:block}
-@media(max-width:600px){.item-row{grid-template-columns:1fr;gap:8px}.preview-header{flex-direction:column;gap:10px}}
+@media(max-width:600px){.item-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -66,7 +56,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0f172a;color:#e2e8f0;m
   <div class="login-box">
     <span class="login-icon">🧾</span>
     <h2>فاکتورساز هوشمند</h2>
-    <p>ساخت فاکتور حرفه‌ای فارسی در چند ثانیه<br>Telegram ID خود را وارد کنید</p>
+    <p>ساخت فاکتور حرفه‌ای فارسی<br>Telegram ID خود را وارد کنید</p>
     <input type="text" id="telegramIdInput" class="tg-input" placeholder="@username یا عدد ID">
     <button class="btn-primary" onclick="doLogin()">ورود به سیستم</button>
     <div id="loginStatus" class="status-msg"></div>
@@ -82,68 +72,43 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#0f172a;color:#e2e8f0;m
       <button class="logout-btn" onclick="doLogout()">خروج</button>
     </div>
   </div>
-
-  <div class="credit-warning" id="creditWarning">
-    ⚠️ اعتبار شما تمام شده است. برای خرید اعتبار به <a href="https://t.me/King_of_elessar" target="_blank" style="color:#92400e;font-weight:700">@King_of_elessar</a> پیام دهید.
-  </div>
+  <div class="credit-warning" id="creditWarning">⚠️ اعتبار تمام شده. <a href="https://t.me/King_of_elessar" target="_blank" style="color:#92400e;font-weight:700">@King_of_elessar</a></div>
 
   <div class="invoice-form">
     <h3>📝 اطلاعات فاکتور</h3>
     <div class="form-row">
-      <div class="form-group"><label>شماره فاکتور</label><input type="text" id="invoiceNumber" placeholder="INV-001"></div>
-      <div class="form-group"><label>عنوان فاکتور</label><input type="text" id="invoiceTitle" placeholder="خدمات طراحی وب"></div>
-      <div class="form-group"><label>ارز</label><select id="currency"><option value="IRR">ریال ایران</option><option value="USD">دلار آمریکا</option><option value="EUR">یورو</option></select></div>
-    </div>
-    <div class="form-row">
+      <div class="form-group"><label>شماره</label><input type="text" id="invoiceNumber" placeholder="INV-001"></div>
+      <div class="form-group"><label>عنوان</label><input type="text" id="invoiceTitle" placeholder="خدمات طراحی"></div>
       <div class="form-group"><label>نام مشتری</label><input type="text" id="clientName" placeholder="شرکت نمونه"></div>
-      <div class="form-group"><label>تلفن مشتری</label><input type="text" id="clientPhone" placeholder="0912..."></div>
-      <div class="form-group"><label>تاریخ سررسید</label><input type="date" id="dueDate"></div>
     </div>
-
     <div class="items-section">
-      <h3 style="margin-bottom:15px">📦 اقلام فاکتور</h3>
+      <h3 style="margin-bottom:15px">📦 اقلام</h3>
       <div id="itemsContainer"></div>
       <button class="add-item-btn" onclick="addItem()">+ افزودن قلم</button>
     </div>
-
     <div class="totals">
-      <div class="total-row"><span>جمع کل:</span><span id="subtotalDisplay">0</span></div>
-      <div class="total-row"><span>مالیات (9%):</span><span id="taxDisplay">0</span></div>
-      <div class="total-row"><span>تخفیف:</span><input type="number" id="discountInput" value="0" style="width:100px;padding:6px;border:1px solid #334155;border-radius:4px;background:#1e293b;color:#fff;text-align:right" oninput="updateTotals()"></div>
-      <div class="total-row final"><span>مبلغ نهایی:</span><span id="totalDisplay">0</span></div>
+      <div class="total-row"><span>جمع:</span><span id="subtotalDisplay">0</span></div>
+      <div class="total-row"><span>مالیات 9%:</span><span id="taxDisplay">0</span></div>
+      <div class="total-row final"><span>نهایی:</span><span id="totalDisplay">0</span></div>
     </div>
-
-    <button class="generate-btn" id="generateBtn" onclick="generateInvoice()">🧾 پیش‌نمایش و ذخیره فاکتور (۱ اعتبار)</button>
+    <button class="generate-btn" id="generateBtn" onclick="generateInvoice()">🧾 پیش‌نمایش و ذخیره (۱ اعتبار)</button>
   </div>
 
   <div class="preview-section" id="previewSection">
     <div class="preview-header">
-      <div>
-        <div class="preview-title" id="previewTitle">فاکتور فروش</div>
-        <div style="color:#6b7280;font-size:.9rem;margin-top:5px" id="previewClient">مشتری: -</div>
-      </div>
-      <div class="preview-meta">
-        <div id="previewNumber">شماره: -</div>
-        <div id="previewDate">تاریخ: -</div>
-        <div id="previewDue">سررسید: -</div>
-      </div>
+      <div class="preview-title" id="previewTitle">فاکتور</div>
+      <div style="text-align:left;font-size:.85rem;color:#6b7280" id="previewMeta"></div>
     </div>
-    <table class="preview-table">
-      <thead><tr><th>شرح</th><th>تعداد</th><th>فی واحد</th><th>مبلغ</th></tr></thead>
-      <tbody id="previewItems"></tbody>
-    </table>
-    <div class="preview-totals">
-      <div>جمع کل: <span id="previewSubtotal">0</span></div>
-      <div>مالیات (9%): <span id="previewTax">0</span></div>
-      <div>تخفیف: <span id="previewDiscount">0</span></div>
-      <div class="final">مبلغ نهایی: <span id="previewTotal">0</span></div>
-    </div>
-    <button class="download-btn" onclick="window.print()">🖨️ چاپ / ذخیره PDF</button>
+    <table class="preview-table"><thead><tr><th>شرح</th><th>تعداد</th><th>فی</th><th>مبلغ</th></tr></thead><tbody id="previewItems"></tbody></table>
+    <div class="preview-totals" id="previewTotals"></div>
+    <button class="download-btn" onclick="window.print()">🖨️ چاپ / PDF</button>
   </div>
 </div>
 
 <script>
-var API_URL = window.location.origin;
+// ⚠️ آدرس سرور بک‌اند خود را اینجا وارد کنید
+var API_URL = 'https://smart-invoice-server.onrender.com';
+
 var currentTelegramId = '';
 var currentCredits = 0;
 var items = [];
@@ -151,152 +116,75 @@ var items = [];
 function formatNumber(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
 
 async function doLogin() {
-  var input = document.getElementById('telegramIdInput').value.trim();
-  var statusEl = document.getElementById('loginStatus');
-  if (!input) { statusEl.textContent = 'لطفاً Telegram ID را وارد کنید'; statusEl.className = 'status-msg status-error'; return; }
-  // Clean @ prefix if present
-  var tgId = input.replace(/^@/, '');
-  statusEl.textContent = 'در حال بررسی...'; statusEl.className = 'status-msg';
+  var input = document.getElementById('telegramIdInput').value.trim().replace(/^@/, '');
+  var st = document.getElementById('loginStatus');
+  if (!input) { st.textContent = 'ID الزامی است'; st.className = 'status-msg status-error'; return; }
+  st.textContent = 'در حال بررسی...';
   try {
-    var res = await fetch(API_URL + '/api/user/profile', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Telegram-ID': tgId } });
+    var res = await fetch(API_URL + '/api/user/profile', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Telegram-ID': input } });
     var data = await res.json();
-    if (data.success && data.user) {
-      currentTelegramId = tgId;
-      currentCredits = data.user.credits;
-      localStorage.setItem('si_tg_id', tgId);
-      updateCreditsUI();
+    if (data.success) {
+      currentTelegramId = input; currentCredits = data.user.credits;
+      localStorage.setItem('si_tg_id', input); updateUI();
       document.getElementById('loginOverlay').style.display = 'none';
       document.getElementById('mainApp').classList.add('unlocked');
-      addItem(); addItem(); // Start with 2 empty rows
-    } else { statusEl.textContent = data.error || 'خطا در ورود'; statusEl.className = 'status-msg status-error'; }
-  } catch(e) { statusEl.textContent = '❌ خطا در اتصال به سرور'; statusEl.className = 'status-msg status-error'; }
+      addItem(); addItem();
+    } else { st.textContent = data.error || 'خطا'; st.className = 'status-msg status-error'; }
+  } catch(e) { st.textContent = '❌ خطا در اتصال به سرور'; st.className = 'status-msg status-error'; }
 }
 
 function doLogout() {
-  currentTelegramId = '';
-  localStorage.removeItem('si_tg_id');
+  currentTelegramId = ''; localStorage.removeItem('si_tg_id');
   document.getElementById('mainApp').classList.remove('unlocked');
   document.getElementById('loginOverlay').style.display = 'flex';
-  document.getElementById('telegramIdInput').value = '';
-  document.getElementById('loginStatus').textContent = '';
 }
 
-function updateCreditsUI() {
+function updateUI() {
   document.getElementById('creditsBadge').textContent = '💎 ' + currentCredits + ' اعتبار';
-  var warning = document.getElementById('creditWarning');
-  if (currentCredits <= 0) warning.classList.add('show');
-  else warning.classList.remove('show');
+  var w = document.getElementById('creditWarning');
+  if (currentCredits <= 0) w.classList.add('show'); else w.classList.remove('show');
 }
 
-// Auto-login from localStorage
 (async function() {
-  var saved = localStorage.getItem('si_tg_id');
-  if (saved) {
-    try {
-      var res = await fetch(API_URL + '/api/user/profile', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Telegram-ID': saved } });
-      var data = await res.json();
-      if (data.success && data.user) {
-        currentTelegramId = saved;
-        currentCredits = data.user.credits;
-        updateCreditsUI();
-        document.getElementById('loginOverlay').style.display = 'none';
-        document.getElementById('mainApp').classList.add('unlocked');
-        addItem(); addItem();
-      }
-    } catch(e) {}
-  }
+  var s = localStorage.getItem('si_tg_id');
+  if (s) { try { var r = await fetch(API_URL+'/api/user/profile',{method:'POST',headers:{'Content-Type':'application/json','X-Telegram-ID':s}}); var d=await r.json(); if(d.success){currentTelegramId=s;currentCredits=d.user.credits;updateUI();document.getElementById('loginOverlay').style.display='none';document.getElementById('mainApp').classList.add('unlocked');addItem();addItem();}}catch(e){} }
 })();
 
-function addItem() {
-  var id = Date.now() + Math.random();
-  items.push({ id: id, desc: '', qty: 1, price: 0 });
-  renderItems();
-}
-
-function removeItem(id) {
-  items = items.filter(function(i) { return i.id !== id; });
-  renderItems();
-  updateTotals();
-}
-
+function addItem() { items.push({id:Date.now()+Math.random(),desc:'',qty:1,price:0}); renderItems(); }
+function removeItem(id) { items=items.filter(function(i){return i.id!==id}); renderItems(); updateTotals(); }
 function renderItems() {
-  var container = document.getElementById('itemsContainer');
-  container.innerHTML = items.map(function(item) {
-    return '<div class="item-row">' +
-      '<input type="text" placeholder="شرح کالا/خدمات" value="' + item.desc + '" onchange="updateItem(' + item.id + ',\'desc\',this.value)">' +
-      '<input type="number" placeholder="تعداد" value="' + item.qty + '" min="1" onchange="updateItem(' + item.id + ',\'qty\',this.value)">' +
-      '<input type="number" placeholder="فی واحد" value="' + item.price + '" min="0" onchange="updateItem(' + item.id + ',\'price\',this.value)">' +
-      '<input type="text" value="' + formatNumber(item.qty * item.price) + '" disabled style="color:#10b981;font-weight:700">' +
-      '<button class="remove-item" onclick="removeItem(' + item.id + ')">✕</button>' +
-      '</div>';
+  document.getElementById('itemsContainer').innerHTML = items.map(function(it){
+    return '<div class="item-row"><input placeholder="شرح" value="'+it.desc+'" onchange="upd('+it.id+',\'desc\',this.value)"><input type="number" placeholder="تعداد" value="'+it.qty+'" min="1" onchange="upd('+it.id+',\'qty\',this.value)"><input type="number" placeholder="فی" value="'+it.price+'" min="0" onchange="upd('+it.id+',\'price\',this.value)"><input value="'+formatNumber(it.qty*it.price)+'" disabled style="color:#10b981;font-weight:700"><button class="remove-item" onclick="removeItem('+it.id+')">✕</button></div>';
   }).join('');
 }
-
-function updateItem(id, field, value) {
-  var item = items.find(function(i) { return i.id === id; });
-  if (item) {
-    if (field === 'desc') item.desc = value;
-    else item[field] = parseInt(value) || 0;
-    renderItems();
-    updateTotals();
-  }
-}
-
+function upd(id,f,v) { var it=items.find(function(i){return i.id===id}); if(it){if(f==='desc')it.desc=v;else it[f]=parseInt(v)||0;renderItems();updateTotals();} }
 function updateTotals() {
-  var subtotal = items.reduce(function(sum, i) { return sum + (i.qty * i.price); }, 0);
-  var tax = Math.floor(subtotal * 0.09);
-  var discount = parseInt(document.getElementById('discountInput').value) || 0;
-  var total = subtotal + tax - discount;
-  document.getElementById('subtotalDisplay').textContent = formatNumber(subtotal);
-  document.getElementById('taxDisplay').textContent = formatNumber(tax);
-  document.getElementById('totalDisplay').textContent = formatNumber(total);
+  var sub=items.reduce(function(s,i){return s+(i.qty*i.price)},0);
+  document.getElementById('subtotalDisplay').textContent=formatNumber(sub);
+  document.getElementById('taxDisplay').textContent=formatNumber(Math.floor(sub*0.09));
+  document.getElementById('totalDisplay').textContent=formatNumber(sub+Math.floor(sub*0.09));
 }
 
 async function generateInvoice() {
-  if (currentCredits <= 0) { alert('اعتبار کافی نیست. لطفاً از @King_of_elessar اعتبار بخرید.'); return; }
-  var clientName = document.getElementById('clientName').value.trim();
-  if (!clientName) { alert('نام مشتری الزامی است'); return; }
-  if (items.length === 0 || items.every(function(i) { return !i.desc; })) { alert('حداقل یک قلم اضافه کنید'); return; }
-
-  var btn = document.getElementById('generateBtn');
-  btn.disabled = true; btn.textContent = '⏳ در حال پردازش...';
-
+  if(currentCredits<=0){alert('اعتبار کافی نیست');return;}
+  if(!document.getElementById('clientName').value.trim()){alert('نام مشتری الزامی است');return;}
+  var btn=document.getElementById('generateBtn');btn.disabled=true;btn.textContent='⏳ پردازش...';
   try {
-    // 1. Check credits
-    var checkRes = await fetch(API_URL + '/api/credits/check', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Telegram-ID': currentTelegramId }, body: JSON.stringify({ cost: 1 }) });
-    var checkData = await checkRes.json();
-    if (!checkData.success) { alert(checkData.message); btn.disabled = false; btn.textContent = '🧾 پیش‌نمایش و ذخیره فاکتور (۱ اعتبار)'; return; }
-
-    // 2. Consume credit
-    var consumeRes = await fetch(API_URL + '/api/credits/consume', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Telegram-ID': currentTelegramId }, body: JSON.stringify({ cost: 1, description: 'Invoice creation' }) });
-    var consumeData = await consumeRes.json();
-    if (!consumeData.success) { alert('خطا در کسر اعتبار'); btn.disabled = false; btn.textContent = '🧾 پیش‌نمایش و ذخیره فاکتور (۱ اعتبار)'; return; }
-    currentCredits = consumeData.balance;
-    updateCreditsUI();
-
-    // 3. Show preview
-    var subtotal = items.reduce(function(sum, i) { return sum + (i.qty * i.price); }, 0);
-    var tax = Math.floor(subtotal * 0.09);
-    var discount = parseInt(document.getElementById('discountInput').value) || 0;
-    var total = subtotal + tax - discount;
-
-    document.getElementById('previewTitle').textContent = document.getElementById('invoiceTitle').value || 'فاکتور فروش';
-    document.getElementById('previewClient').textContent = 'مشتری: ' + clientName;
-    document.getElementById('previewNumber').textContent = 'شماره: ' + (document.getElementById('invoiceNumber').value || '-');
-    document.getElementById('previewDate').textContent = 'تاریخ: ' + new Date().toLocaleDateString('fa-IR');
-    document.getElementById('previewDue').textContent = 'سررسید: ' + (document.getElementById('dueDate').value || '-');
-    document.getElementById('previewItems').innerHTML = items.filter(function(i) { return i.desc; }).map(function(i) {
-      return '<tr><td>' + i.desc + '</td><td>' + i.qty + '</td><td>' + formatNumber(i.price) + '</td><td>' + formatNumber(i.qty * i.price) + '</td></tr>';
-    }).join('');
-    document.getElementById('previewSubtotal').textContent = formatNumber(subtotal);
-    document.getElementById('previewTax').textContent = formatNumber(tax);
-    document.getElementById('previewDiscount').textContent = formatNumber(discount);
-    document.getElementById('previewTotal').textContent = formatNumber(total);
+    var chk=await fetch(API_URL+'/api/credits/check',{method:'POST',headers:{'Content-Type':'application/json','X-Telegram-ID':currentTelegramId},body:JSON.stringify({cost:1})});
+    var cd=await chk.json(); if(!cd.success){alert(cd.message);btn.disabled=false;btn.textContent='🧾 پیش‌نمایش و ذخیره (۱ اعتبار)';return;}
+    var con=await fetch(API_URL+'/api/credits/consume',{method:'POST',headers:{'Content-Type':'application/json','X-Telegram-ID':currentTelegramId},body:JSON.stringify({cost:1,description:'Invoice'})});
+    var cond=await con.json(); if(!cond.success){alert('خطا کسر اعتبار');btn.disabled=false;btn.textContent='🧾 پیش‌نمایش و ذخیره (۱ اعتبار)';return;}
+    currentCredits=cond.balance;updateUI();
+    
+    var sub=items.reduce(function(s,i){return s+(i.qty*i.price)},0);var tax=Math.floor(sub*0.09);var tot=sub+tax;
+    document.getElementById('previewTitle').textContent=document.getElementById('invoiceTitle').value||'فاکتور فروش';
+    document.getElementById('previewMeta').innerHTML='مشتری: '+document.getElementById('clientName').value+'<br>شماره: '+(document.getElementById('invoiceNumber').value||'-')+'<br>تاریخ: '+new Date().toLocaleDateString('fa-IR');
+    document.getElementById('previewItems').innerHTML=items.filter(function(i){return i.desc}).map(function(i){return '<tr><td>'+i.desc+'</td><td>'+i.qty+'</td><td>'+formatNumber(i.price)+'</td><td>'+formatNumber(i.qty*i.price)+'</td></tr>'}).join('');
+    document.getElementById('previewTotals').innerHTML='<div>جمع: '+formatNumber(sub)+'</div><div>مالیات: '+formatNumber(tax)+'</div><div class="final">نهایی: '+formatNumber(tot)+'</div>';
     document.getElementById('previewSection').classList.add('show');
-    document.getElementById('previewSection').scrollIntoView({ behavior: 'smooth' });
-
-  } catch(e) { alert('خطا در اتصال به سرور'); }
-  btn.disabled = false; btn.textContent = '🧾 پیش‌نمایش و ذخیره فاکتور (۱ اعتبار)';
+    document.getElementById('previewSection').scrollIntoView({behavior:'smooth'});
+  }catch(e){alert('خطا')}
+  btn.disabled=false;btn.textContent='🧾 پیش‌نمایش و ذخیره (۱ اعتبار)';
 }
 </script>
 </body>
