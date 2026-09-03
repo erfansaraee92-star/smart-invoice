@@ -68,7 +68,7 @@ async function initDB() {
   
   await pool.query("CREATE TABLE IF NOT EXISTS si_transactions (id SERIAL PRIMARY KEY, owner_email VARCHAR(255) REFERENCES si_users(email), type VARCHAR(20) NOT NULL, amount INTEGER NOT NULL, balance_after INTEGER NOT NULL, description TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
   
-  console.log('Smart Invoice DB initialized (Email/Password Auth)');
+  console.log('Smart Invoice Server v2 (Email/Password Auth)');
 }
 
 // ═══════════════════════════════════════
